@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=VT323&family=Atkinson+Hyperlegible+Mono:wght@400;500;700&display=swap");
+
+/* M.S.A.N. components: plain CSS classes, prefix msan-. Colors come from tokens.css. */
+
+.msan-root { background: var(--void); color: var(--ink); font-family: var(--font-mono); font-size: 16px; line-height: 1.6; }
+.msan-root a { color: var(--gold); }
+.msan-root a:hover { color: var(--gold-hover); }
+.msan-root :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Effects */
+.msan-crt { position: relative; }
+.msan-crt::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 50;
+  background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.025) 0, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 3px); }
+.msan-scan { position: relative; overflow: hidden; width: fit-content; max-width: 100%; }
+.msan-scan::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(to bottom, transparent 0, transparent 3px, rgba(4,6,12,0.6) 3px, rgba(4,6,12,0.6) 5px); }
+.msan-scan--fine::after { background: repeating-linear-gradient(to bottom, transparent 0, transparent 2px, rgba(4,6,12,0.55) 2px, rgba(4,6,12,0.55) 3px); }
+.msan-scan--roll::before { content: ""; position: absolute; left: 0; right: 0; top: -30%; height: 22%; pointer-events: none; z-index: 1;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,236,170,0.14), rgba(255,255,255,0)); animation: msan-roll 4.5s linear infinite; }
+@keyframes msan-roll { to { top: 110%; } }
+.msan-flicker { animation: msan-flicker 7s infinite; }
+@keyframes msan-flicker { 0%, 94%, 100% { opacity: 1; } 96% { opacity: .8; } }
+.msan-blink { animation: msan-blink 1.1s steps(1) infinite; }
+@keyframes msan-blink { 50% { opacity: 0; } }
+.msan-eyes { color: var(--signal-red); text-shadow: 0 0 10px rgba(255,59,47,0.8), 0 0 24px rgba(255,59,47,0.5); }
+.msan-still .msan-scan--roll::before { display: none; }
+.msan-still .msan-flicker, .msan-still .msan-blink, .msan-still .msan-ticker__track { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .msan-flicker, .msan-blink, .msan-ticker__track, .msan-scan--roll::before { animation: none; }
+  .msan-scan--roll::before { display: none; }
+}
+
+/* Type helpers */
+.msan-eyebrow { margin: 0; font-size: 15px; letter-spacing: 0.08em; color: var(--phosphor); }
+.msan-h-section { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 72px; line-height: 0.95; color: var(--gold); }
+.msan-h-card { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 40px; line-height: 1; color: var(--gold); }
+.msan-label { font-size: 14px; letter-spacing: 0.06em; color: var(--steel); }
+@media (max-width: 720px) { .msan-h-section { font-size: 44px; } }
+
+/* Button */
+.msan-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border: 1px solid var(--gold);
+  border-radius: 0; font-family: var(--font-mono); font-weight: 700; font-size: 14px; letter-spacing: 0.1em; text-decoration: none; cursor: pointer; box-sizing: border-box; }
+.msan-btn--primary { background: var(--gold); color: var(--void); }
+.msan-btn--primary:hover { background: var(--gold-hover); border-color: var(--gold-hover); color: var(--void); }
+.msan-btn--ghost { background: transparent; color: var(--gold); }
+.msan-btn--quiet { background: transparent; color: var(--steel); border-color: var(--line-strong); font-weight: 400; }
+.msan-root a.msan-btn--primary, .msan-root a.msan-btn--primary:hover { color: var(--void); }
+
+/* Entity toggle */
+.msan-toggles { display: flex; flex-wrap: wrap; gap: 8px; }
+.msan-toggle { min-height: 48px; padding: 0 20px; border: 1px solid var(--line-strong); background: var(--panel); color: var(--steel);
+  font-family: var(--font-mono); font-weight: 500; font-size: 15px; letter-spacing: 0.05em; cursor: pointer; border-radius: 0; }
+.msan-toggle[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: var(--void); font-weight: 700; }
+
+/* Case file card */
+.msan-card { border: 1px solid var(--line); background: var(--panel); display: flex; flex-direction: column; }
+.msan-card__head { display: flex; justify-content: space-between; padding: 10px 16px; border-bottom: 1px dashed var(--line); font-size: 14px; letter-spacing: 0.05em; color: var(--steel); }
+.msan-card__status { color: var(--phosphor); }
+.msan-card__evidence { height: 200px; margin: 16px; border: 1px solid var(--line); background: var(--void); display: flex; align-items: center; justify-content: center;
+  color: var(--placeholder); font-size: 14px; letter-spacing: 0.06em; text-align: center; padding: 16px; box-sizing: border-box; overflow: hidden; }
+.msan-card__evidence--paper { background: var(--paper); padding: 0; }
+.msan-card__evidence img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.msan-card__body { padding: 0 16px 16px; display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
+.msan-card__body p { margin: 0; }
+.msan-card__meta { font-size: 14px; letter-spacing: 0.05em; color: var(--steel); }
+.msan-card__first { font-size: 15px; color: var(--muted); }
+.msan-card__first span { color: var(--ink); }
+.msan-strip { margin-top: auto; border-top: 1px solid var(--gold); background: var(--wv-blue); padding: 12px 16px; display: flex; flex-direction: column; gap: 2px; }
+.msan-strip__label { font-size: 13px; letter-spacing: 0.08em; color: var(--gold); }
+.msan-strip__value { font-size: 14px; color: var(--ink-bright); }
+
+/* Terminal */
+.msan-term { border: 1px solid var(--line); background: var(--panel); box-shadow: var(--shadow-terminal); }
+.msan-term__bar { display: flex; justify-content: space-between; padding: 8px 16px; background: var(--wv-blue); font-size: 14px; letter-spacing: 0.1em; color: var(--steel); }
+.msan-term__body { padding: 20px; font-size: 15px; line-height: 1.9; color: var(--phosphor); }
+.msan-term__ok { color: var(--gold); }
+.msan-term__alert { color: var(--signal-red); }
+.msan-term__note { color: var(--steel); }
+
+/* Ticker */
+.msan-ticker { border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); background: var(--wv-blue); color: var(--gold);
+  font-size: 15px; letter-spacing: 0.08em; display: flex; align-items: stretch; }
+.msan-ticker__pause { flex: 0 0 auto; min-width: 48px; min-height: 46px; border: 0; border-right: 1px solid var(--gold); background: var(--void); color: var(--gold);
+  cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.msan-ticker__window { flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; }
+.msan-ticker__track { display: flex; width: max-content; padding: 12px 0; animation: msan-tick 40s linear infinite; }
+.msan-ticker__track > span { padding-right: 32px; }
+.msan-ticker:hover .msan-ticker__track, .msan-ticker:focus-within .msan-ticker__track, .msan-ticker--paused .msan-ticker__track { animation-play-state: paused; }
+@keyframes msan-tick { to { transform: translateX(-50%); } }
+
+/* Form field */
+.msan-field { display: flex; flex-direction: column; gap: 6px; }
+.msan-field label { font-size: 14px; letter-spacing: 0.06em; color: var(--steel); }
+.msan-input { min-height: 48px; padding: 0 12px; background: var(--void); color: var(--ink); border: 1px solid var(--line-strong); border-radius: 0;
+  font-family: var(--font-mono); font-size: 16px; box-sizing: border-box; width: 100%; }
+textarea.msan-input { padding: 12px; min-height: 120px; resize: vertical; }
+.msan-input::placeholder { color: var(--placeholder); }
+.msan-input:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Exhibit */
+.msan-exhibit { margin: 0; position: relative; transform: rotate(2deg); background: var(--paper); padding: 14px 14px 12px; box-sizing: border-box; box-shadow: var(--shadow-exhibit); }
+.msan-exhibit img { display: block; width: 100%; height: auto; }
+.msan-exhibit__tape { position: absolute; top: -12px; left: 38%; width: 96px; height: 26px; background: rgba(234,170,0,0.55); transform: rotate(-4deg); }
+.msan-exhibit figcaption { display: flex; justify-content: space-between; gap: 12px; padding-top: 10px; font-size: 13px; letter-spacing: 0.06em; color: var(--paper-ink); }
+.msan-exhibit__stamp { position: absolute; right: 20px; top: 26px; border: 3px solid var(--stamp-red); color: var(--stamp-red); padding: 0 10px;
+  font-family: var(--font-display); font-size: 30px; line-height: 1.2; letter-spacing: 0.1em; transform: rotate(-12deg); }

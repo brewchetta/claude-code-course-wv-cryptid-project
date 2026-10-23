@@ -1,0 +1,47 @@
+/* M.S.A.N. — generated from tokens.json */
+:root {
+  --void: #04060C;
+  --panel: #000E22;
+  --topbar: #001A3A;
+  --wv-blue: #002855;
+  --line: #1F4C8A;
+  --line-strong: #4A7BC0;
+  --gold: #EAAA00;
+  --gold-hover: #FFD25C;
+  --signal-red: #FF3B2F;
+  --stamp-red: #C8201A;
+  --phosphor: #7CFFB2;
+  --ink: #C9D3E3;
+  --ink-bright: #FFFFFF;
+  --steel: #8FB0DE;
+  --muted: #8A97AD;
+  --placeholder: #6F7D96;
+  --paper: #EDE8DD;
+  --paper-ink: #2A2A2A;
+  --radar-ground: #020A08;
+  --radar-line: #1E4A37;
+  --radar-rim: #2E6B4F;
+
+  --font-display: VT323, ui-monospace, monospace;
+  --font-mono: "Atkinson Hyperlegible Mono", ui-monospace, monospace;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-24: 96px;
+  --space-28: 112px;
+
+  --radius-none: 0;
+  --radius-full: 9999px;
+
+  --shadow-exhibit: 0 28px 70px rgba(0,0,0,0.7), 0 0 60px rgba(255,59,47,0.08);
+  --shadow-terminal: 0 0 0 4px #04060C, 0 0 0 5px #1F4C8A, 0 20px 50px rgba(0,0,0,0.6);
+
+}

@@ -1,0 +1,173 @@
+/* Page layout and the few pieces the design system's bundle.css does not cover. */
+
+.msan-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: var(--space-6);
+  padding-right: var(--space-6);
+}
+
+.msan-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.msan-section-head p.msan-eyebrow {
+  margin-bottom: var(--space-2);
+}
+
+.msan-muted {
+  margin: 0;
+  color: var(--muted);
+}
+
+.msan-lead {
+  margin: 0;
+  max-width: 560px;
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.msan-dashed-note {
+  border: 1px dashed var(--line);
+  padding: var(--space-4) var(--space-5);
+  font-size: 15px;
+  color: var(--steel);
+}
+
+/* Radar (not in the design system bundle) */
+.msan-radar {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 1;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--radar-rim);
+  background: var(--radar-ground);
+  overflow: hidden;
+}
+
+.msan-radar__ring,
+.msan-radar__sweep {
+  position: absolute;
+  border-radius: var(--radius-full);
+}
+
+.msan-radar__ring {
+  border: 1px solid var(--radar-line);
+}
+
+.msan-radar__sweep {
+  inset: 0;
+  background: conic-gradient(from 0deg, rgba(124, 255, 178, 0.28), rgba(124, 255, 178, 0) 22%);
+  animation: msan-sweep 6s linear infinite;
+}
+
+.msan-radar__blip {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: var(--gold);
+  animation: msan-pulse 2.4s ease-out infinite;
+}
+
+@keyframes msan-sweep {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes msan-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(234, 170, 0, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 14px rgba(234, 170, 0, 0);
+  }
+}
+
+/* One-shot scan over a button: add .is-scanning for the length of the animation
+   (0.9s) and remove it. A bright band sweeps top to bottom over scan lines. */
+.msan-btn--scan {
+  position: relative;
+  overflow: hidden;
+}
+
+.msan-btn--scan.is-scanning::before,
+.msan-btn--scan.is-scanning::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.msan-btn--scan.is-scanning::before {
+  top: -45%;
+  height: 45%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0)
+  );
+  animation: msan-scan-once 0.9s linear 1 both;
+}
+
+.msan-btn--scan.is-scanning::after {
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    rgba(4, 6, 12, 0.2) 2px,
+    rgba(4, 6, 12, 0.2) 3px
+  );
+  animation: msan-scan-fade 0.9s linear 1 both;
+}
+
+@keyframes msan-scan-once {
+  to {
+    top: 100%;
+  }
+}
+
+@keyframes msan-scan-fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+}
+
+.msan-still .msan-btn--scan::before,
+.msan-still .msan-btn--scan::after {
+  display: none;
+}
+
+.msan-still .msan-radar__sweep,
+.msan-still .msan-radar__blip {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .msan-radar__sweep,
+  .msan-radar__blip {
+    animation: none;
+  }
+
+  .msan-btn--scan::before,
+  .msan-btn--scan::after {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .msan-h-section {
+    font-size: 44px;
+  }
+}
